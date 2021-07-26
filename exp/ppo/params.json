@@ -4,7 +4,7 @@
     "act_size": 21,
     "n_target": 8,
     "dataset": "cube",
-    "episode_workers": 16,
+    "episode_workers": 500,
     "acquisition_cost": 0.05,
     "model_dir": "./exp/cube",
     "num_heads": 4,
