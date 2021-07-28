@@ -61,7 +61,7 @@ if args.mode == 'resume':
     agent.train()
 if args.mode == 'train':
     agent.train()
-train_dict = agent.evaluate(hard=args.hard, max_batches=2)
+train_dict = agent.evaluate(hard=args.hard, max_batches=30)
 
 # test
 with tf.device(f"/gpu:{args.env_device}"):
@@ -70,11 +70,13 @@ with tf.device(f"/gpu:{args.env_device}"):
 with tf.device(f"/gpu:{args.agent_device}"):
     agent = PPOPolicy(params, env, 'test')
 
-test_dict = agent.evaluate(hard=args.hard, max_batches=2)
+test_dict = agent.evaluate(hard=args.hard, max_batches=30)
 
 print('######################################################')
-print(np.mean(train_dict['metrics']['acc_acflow']))
-print(np.mean(test_dict['metrics']['acc_acflow']))
+print("train_acflow: " + str(np.mean(train_dict['metrics']['acc_acflow'])))
+print("train_policy: " + str(np.mean(train_dict['metrics']['acc_policy'])))
+print("test_acflow: " + str(np.mean(test_dict['metrics']['acc_acflow'])))
+print("test_policy: " + str(np.mean(test_dict['metrics']['acc_policy'])))
 # save
 os.makedirs(f'{params.exp_dir}/evaluate', exist_ok=True)
 with open(f'{params.exp_dir}/evaluate/train.pkl', 'wb') as f:
