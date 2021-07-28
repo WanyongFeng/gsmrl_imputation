@@ -72,6 +72,9 @@ with tf.device(f"/gpu:{args.agent_device}"):
 
 test_dict = agent.evaluate(hard=args.hard, max_batches=2)
 
+print('######################################################')
+print(np.mean(train_dict['metrics']['acc_acflow']))
+print(np.mean(test_dict['metrics']['acc_acflow']))
 # save
 os.makedirs(f'{params.exp_dir}/evaluate', exist_ok=True)
 with open(f'{params.exp_dir}/evaluate/train.pkl', 'wb') as f:
