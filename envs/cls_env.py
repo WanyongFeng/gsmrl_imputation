@@ -143,8 +143,9 @@ class Env(object):
             diff = np.array(diff)
             for i, value in enumerate(x):
                 if value[diff[i]] == 0.0:
-                    idx = random.randint(0, 9)
-                    value[diff[i]] = sam[0][i][idx][diff[i]]
+                    # idx = random.randint(0, 9)
+                    # value[diff[i]] = sam[0][i][idx][diff[i]]
+                    value[diff[i]] = np.mean(sam[0][i], axis = 0)[diff[i]]
 
             self.x[normal] = x
             logger.info(f'self.x_changed:  {self.x}')
